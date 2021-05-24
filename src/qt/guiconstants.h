@@ -1,9 +1,10 @@
 // Copyright (c) 2011-2020 The Bitcoin Core developers
+// Copyright (c) 2020-2021 The Coyote Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_QT_GUICONSTANTS_H
-#define BITCOIN_QT_GUICONSTANTS_H
+#ifndef COYOTECOIN_QT_GUICONSTANTS_H
+#define COYOTECOIN_QT_GUICONSTANTS_H
 
 #include <cstdint>
 
@@ -13,7 +14,7 @@ static const int MODEL_UPDATE_DELAY = 250;
 /* AskPassphraseDialog -- Maximum passphrase length */
 static const int MAX_PASSPHRASE_SIZE = 1024;
 
-/* BitcoinGUI -- Size of icons in status bar */
+/* CoyotecoinGUI -- Size of icons in status bar */
 static const int STATUSBAR_ICONSIZE = 16;
 
 static const bool DEFAULT_SPLASHSCREEN = true;
@@ -42,12 +43,12 @@ static const int TOOLTIP_WRAP_THRESHOLD = 80;
 /* Number of frames in spinner animation */
 #define SPINNER_FRAMES 36
 
-#define QAPP_ORG_NAME "Bitcoin"
-#define QAPP_ORG_DOMAIN "bitcoin.org"
-#define QAPP_APP_NAME_DEFAULT "Bitcoin-Qt"
-#define QAPP_APP_NAME_TESTNET "Bitcoin-Qt-testnet"
-#define QAPP_APP_NAME_SIGNET "Bitcoin-Qt-signet"
-#define QAPP_APP_NAME_REGTEST "Bitcoin-Qt-regtest"
+#define QAPP_ORG_NAME "Coyotecoin"
+#define QAPP_ORG_DOMAIN "coyote-coin.org"
+#define QAPP_APP_NAME_DEFAULT "Coyotecoin-Qt"
+#define QAPP_APP_NAME_TESTNET "Coyotecoin-Qt-testnet"
+#define QAPP_APP_NAME_SIGNET "Coyotecoin-Qt-signet"
+#define QAPP_APP_NAME_REGTEST "Coyotecoin-Qt-regtest"
 
 /* One gigabyte (GB) in bytes */
 static constexpr uint64_t GB_BYTES{1000000000};
@@ -55,4 +56,4 @@ static constexpr uint64_t GB_BYTES{1000000000};
 // Default prune target displayed in GUI.
 static constexpr int DEFAULT_PRUNE_TARGET_GB{2};
 
-#endif // BITCOIN_QT_GUICONSTANTS_H
+#endif // COYOTECOIN_QT_GUICONSTANTS_H

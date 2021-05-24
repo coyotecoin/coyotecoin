@@ -1,13 +1,14 @@
 // Copyright (c) 2011-2020 The Bitcoin Core developers
+// Copyright (c) 2020-2021 The Coyotecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #if defined(HAVE_CONFIG_H)
-#include <config/bitcoin-config.h>
+#include <config/coyotecoin-config.h>
 #endif
 
-#include <qt/bitcoin.h>
-#include <qt/bitcoingui.h>
+#include <qt/coyotecoin.h>
+#include <qt/coyotecoingui.h>
 
 #include <chainparams.h>
 #include <qt/clientmodel.h>
@@ -135,11 +136,11 @@ static void initTranslations(QTranslator &qtTranslatorBase, QTranslator &qtTrans
     if (qtTranslator.load("qt_" + lang_territory, QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
         QApplication::installTranslator(&qtTranslator);
 
-    // Load e.g. bitcoin_de.qm (shortcut "de" needs to be defined in bitcoin.qrc)
+    // Load e.g. coyotecoin_de.qm (shortcut "de" needs to be defined in coyote.qrc)
     if (translatorBase.load(lang, ":/translations/"))
         QApplication::installTranslator(&translatorBase);
 
-    // Load e.g. bitcoin_de_DE.qm (shortcut "de_DE" needs to be defined in bitcoin.qrc)
+    // Load e.g. coyote_de_DE.qm (shortcut "de_DE" needs to be defined in coyote.qrc)
     if (translator.load(lang_territory, ":/translations/"))
         QApplication::installTranslator(&translator);
 }
@@ -155,18 +156,18 @@ void DebugMessageHandler(QtMsgType type, const QMessageLogContext& context, cons
     }
 }
 
-BitcoinCore::BitcoinCore(interfaces::Node& node) :
+CoyoteCore::CoyotecoinCore(interfaces::Node& node) :
     QObject(), m_node(node)
 {
 }
 
-void BitcoinCore::handleRunawayException(const std::exception *e)
+void CoyotecoinCore::handleRunawayException(const std::exception *e)
 {
     PrintExceptionContinue(e, "Runaway exception");
     Q_EMIT runawayException(QString::fromStdString(m_node.getWarnings().translated));
 }
 
-void BitcoinCore::initialize()
+void CoyotecoinCore::initialize()
 {
     try
     {
@@ -182,7 +183,7 @@ void BitcoinCore::initialize()
     }
 }
 
-void BitcoinCore::shutdown()
+void CoyotecoinCore::shutdown()
 {
     try
     {
@@ -198,9 +199,9 @@ void BitcoinCore::shutdown()
 }
 
 static int qt_argc = 1;
-static const char* qt_argv = "bitcoin-qt";
+static const char* qt_argv = "coyotecoin-qt";
 
-BitcoinApplication::BitcoinApplication():
+CoyotecoinApplication::CoyotecoinApplication():
     QApplication(qt_argc, const_cast<char **>(&qt_argv)),
     coreThread(nullptr),
     optionsModel(nullptr),
@@ -215,20 +216,20 @@ BitcoinApplication::BitcoinApplication():
     setQuitOnLastWindowClosed(false);
 }
 
-void BitcoinApplication::setupPlatformStyle()
+void CoyotecoinApplication::setupPlatformStyle()
 {
     // UI per-platform customization
-    // This must be done inside the BitcoinApplication constructor, or after it, because
+    // This must be done inside the CoyotecoinApplication constructor, or after it, because
     // PlatformStyle::instantiate requires a QApplication
     std::string platformName;
-    platformName = gArgs.GetArg("-uiplatform", BitcoinGUI::DEFAULT_UIPLATFORM);
+    platformName = gArgs.GetArg("-uiplatform", CoyotecoinGUI::DEFAULT_UIPLATFORM);
     platformStyle = PlatformStyle::instantiate(QString::fromStdString(platformName));
     if (!platformStyle) // Fall back to "other" if specified name not found
         platformStyle = PlatformStyle::instantiate("other");
     assert(platformStyle);
 }
 
-BitcoinApplication::~BitcoinApplication()
+CoyotecoinApplication::~CoyotecoinApplication()
 {
     if(coreThread)
     {
@@ -245,38 +246,38 @@ BitcoinApplication::~BitcoinApplication()
 }
 
 #ifdef ENABLE_WALLET
-void BitcoinApplication::createPaymentServer()
+void CoyotecoinApplication::createPaymentServer()
 {
     paymentServer = new PaymentServer(this);
 }
 #endif
 
-void BitcoinApplication::createOptionsModel(bool resetSettings)
+void CoyotecoinApplication::createOptionsModel(bool resetSettings)
 {
     optionsModel = new OptionsModel(this, resetSettings);
 }
 
-void BitcoinApplication::createWindow(const NetworkStyle *networkStyle)
+void CoyotecoinApplication::createWindow(const NetworkStyle *networkStyle)
 {
-    window = new BitcoinGUI(node(), platformStyle, networkStyle, nullptr);
+    window = new CoyotecoinGUI(node(), platformStyle, networkStyle, nullptr);
 
     pollShutdownTimer = new QTimer(window);
-    connect(pollShutdownTimer, &QTimer::timeout, window, &BitcoinGUI::detectShutdown);
+    connect(pollShutdownTimer, &QTimer::timeout, window, &CoyotecoinGUI::detectShutdown);
 }
 
-void BitcoinApplication::createSplashScreen(const NetworkStyle *networkStyle)
+void CoyotecoinApplication::createSplashScreen(const NetworkStyle *networkStyle)
 {
     assert(!m_splash);
     m_splash = new SplashScreen(networkStyle);
     // We don't hold a direct pointer to the splash screen after creation, but the splash
     // screen will take care of deleting itself when finish() happens.
     m_splash->show();
-    connect(this, &BitcoinApplication::requestedInitialize, m_splash, &SplashScreen::handleLoadWallet);
-    connect(this, &BitcoinApplication::splashFinished, m_splash, &SplashScreen::finish);
-    connect(this, &BitcoinApplication::requestedShutdown, m_splash, &QWidget::close);
+    connect(this, &CoyotecoinApplication::requestedInitialize, m_splash, &SplashScreen::handleLoadWallet);
+    connect(this, &CoyotecoinApplication::splashFinished, m_splash, &SplashScreen::finish);
+    connect(this, &CoyotecoinApplication::requestedShutdown, m_splash, &QWidget::close);
 }
 
-void BitcoinApplication::setNode(interfaces::Node& node)
+void CoyotecoinApplication::setNode(interfaces::Node& node)
 {
     assert(!m_node);
     m_node = &node;
@@ -284,32 +285,32 @@ void BitcoinApplication::setNode(interfaces::Node& node)
     if (m_splash) m_splash->setNode(*m_node);
 }
 
-bool BitcoinApplication::baseInitialize()
+bool CoyotecoinApplication::baseInitialize()
 {
     return node().baseInitialize();
 }
 
-void BitcoinApplication::startThread()
+void CoyotecoinApplication::startThread()
 {
     if(coreThread)
         return;
     coreThread = new QThread(this);
-    BitcoinCore *executor = new BitcoinCore(node());
+    CoyotecoinCore *executor = new CoyotecoinCore(node());
     executor->moveToThread(coreThread);
 
     /*  communication to and from thread */
-    connect(executor, &BitcoinCore::initializeResult, this, &BitcoinApplication::initializeResult);
-    connect(executor, &BitcoinCore::shutdownResult, this, &BitcoinApplication::shutdownResult);
-    connect(executor, &BitcoinCore::runawayException, this, &BitcoinApplication::handleRunawayException);
-    connect(this, &BitcoinApplication::requestedInitialize, executor, &BitcoinCore::initialize);
-    connect(this, &BitcoinApplication::requestedShutdown, executor, &BitcoinCore::shutdown);
+    connect(executor, &CoyotecoinCore::initializeResult, this, &CoyotecoinApplication::initializeResult);
+    connect(executor, &CoyotecoinCore::shutdownResult, this, &CoyotecoinApplication::shutdownResult);
+    connect(executor, &CoyotecoinCore::runawayException, this, &CoyotecoinApplication::handleRunawayException);
+    connect(this, &CoyotecoinApplication::requestedInitialize, executor, &CoyotecoinCore::initialize);
+    connect(this, &CoyotecoinApplication::requestedShutdown, executor, &CoyotecoinCore::shutdown);
     /*  make sure executor object is deleted in its own thread */
     connect(coreThread, &QThread::finished, executor, &QObject::deleteLater);
 
     coreThread->start();
 }
 
-void BitcoinApplication::parameterSetup()
+void CoyotecoinApplication::parameterSetup()
 {
     // Default printtoconsole to false for the GUI. GUI programs should not
     // print to the console unnecessarily.
@@ -319,19 +320,19 @@ void BitcoinApplication::parameterSetup()
     InitParameterInteraction(gArgs);
 }
 
-void BitcoinApplication::InitPruneSetting(int64_t prune_MiB)
+void CoyotecoinApplication::InitPruneSetting(int64_t prune_MiB)
 {
     optionsModel->SetPruneTargetGB(PruneMiBtoGB(prune_MiB), true);
 }
 
-void BitcoinApplication::requestInitialize()
+void CoyotecoinApplication::requestInitialize()
 {
     qDebug() << __func__ << ": Requesting initialize";
     startThread();
     Q_EMIT requestedInitialize();
 }
 
-void BitcoinApplication::requestShutdown()
+void CoyotecoinApplication::requestShutdown()
 {
     // Show a simple window indicating shutdown status
     // Do this first as some of the steps may take some time below,
@@ -359,7 +360,7 @@ void BitcoinApplication::requestShutdown()
     Q_EMIT requestedShutdown();
 }
 
-void BitcoinApplication::initializeResult(bool success, interfaces::BlockAndHeaderTipInfo tip_info)
+void CoyotecoinApplication::initializeResult(bool success, interfaces::BlockAndHeaderTipInfo tip_info)
 {
     qDebug() << __func__ << ": Initialization result: " << success;
     // Set exit result.
@@ -393,10 +394,10 @@ void BitcoinApplication::initializeResult(bool success, interfaces::BlockAndHead
 
 #ifdef ENABLE_WALLET
         // Now that initialization/startup is done, process any command-line
-        // bitcoin: URIs or payment requests:
+        // coyotecoin: URIs or payment requests:
         if (paymentServer) {
-            connect(paymentServer, &PaymentServer::receivedPaymentRequest, window, &BitcoinGUI::handlePaymentRequest);
-            connect(window, &BitcoinGUI::receivedURI, paymentServer, &PaymentServer::handleURIOrFile);
+            connect(paymentServer, &PaymentServer::receivedPaymentRequest, window, &CoyotecoinGUI::handlePaymentRequest);
+            connect(window, &CoyotecoinGUI::receivedURI, paymentServer, &PaymentServer::handleURIOrFile);
             connect(paymentServer, &PaymentServer::message, [this](const QString& title, const QString& message, unsigned int style) {
                 window->message(title, message, style);
             });
@@ -410,12 +411,12 @@ void BitcoinApplication::initializeResult(bool success, interfaces::BlockAndHead
     }
 }
 
-void BitcoinApplication::shutdownResult()
+void CoyotecoinApplication::shutdownResult()
 {
     quit(); // Exit second main loop invocation after shutdown finished
 }
 
-void BitcoinApplication::handleRunawayException(const QString &message)
+void CoyotecoinApplication::handleRunawayException(const QString &message)
 {
     QMessageBox::critical(
         nullptr, tr("Runaway exception"),
@@ -424,7 +425,7 @@ void BitcoinApplication::handleRunawayException(const QString &message)
     ::exit(EXIT_FAILURE);
 }
 
-void BitcoinApplication::handleNonFatalException(const QString& message)
+void CoyotecoinApplication::handleNonFatalException(const QString& message)
 {
     assert(QThread::currentThread() == thread());
     QMessageBox::warning(
@@ -434,7 +435,7 @@ void BitcoinApplication::handleNonFatalException(const QString& message)
         QLatin1String("<br><br>") % GUIUtil::MakeHtmlLink(message, PACKAGE_BUGREPORT));
 }
 
-WId BitcoinApplication::getMainWinId() const
+WId CoyotecoinApplication::getMainWinId() const
 {
     if (!window)
         return 0;
@@ -449,7 +450,7 @@ static void SetupUIArgs(ArgsManager& argsman)
     argsman.AddArg("-min", "Start minimized", ArgsManager::ALLOW_ANY, OptionsCategory::GUI);
     argsman.AddArg("-resetguisettings", "Reset all settings changed in the GUI", ArgsManager::ALLOW_ANY, OptionsCategory::GUI);
     argsman.AddArg("-splash", strprintf("Show splash screen on startup (default: %u)", DEFAULT_SPLASHSCREEN), ArgsManager::ALLOW_ANY, OptionsCategory::GUI);
-    argsman.AddArg("-uiplatform", strprintf("Select platform to customize UI for (one of windows, macosx, other; default: %s)", BitcoinGUI::DEFAULT_UIPLATFORM), ArgsManager::ALLOW_ANY | ArgsManager::DEBUG_ONLY, OptionsCategory::GUI);
+    argsman.AddArg("-uiplatform", strprintf("Select platform to customize UI for (one of windows, macosx, other; default: %s)", CoyotecoinGUI::DEFAULT_UIPLATFORM), ArgsManager::ALLOW_ANY | ArgsManager::DEBUG_ONLY, OptionsCategory::GUI);
 }
 
 int GuiMain(int argc, char* argv[])
@@ -472,8 +473,8 @@ int GuiMain(int argc, char* argv[])
     // Do not refer to data directory yet, this can be overridden by Intro::pickDataDirectory
 
     /// 1. Basic Qt initialization (not dependent on parameters or configuration)
-    Q_INIT_RESOURCE(bitcoin);
-    Q_INIT_RESOURCE(bitcoin_locale);
+    Q_INIT_RESOURCE(coyotecoin);
+    Q_INIT_RESOURCE(coyotecoin_locale);
 
     // Generate high-dpi pixmaps
     QApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
@@ -485,7 +486,7 @@ int GuiMain(int argc, char* argv[])
     QApplication::setAttribute(Qt::AA_DontUseNativeDialogs);
 #endif
 
-    BitcoinApplication app;
+    CoyotecoinApplication app;
     QFontDatabase::addApplicationFont(":/fonts/monospace");
 
     /// 2. Parse command-line options. We do this after qt in order to show an error if there are problems parsing these
@@ -535,7 +536,7 @@ int GuiMain(int argc, char* argv[])
     // Gracefully exit if the user cancels
     if (!Intro::showIfNeeded(did_show_intro, prune_MiB)) return EXIT_SUCCESS;
 
-    /// 6. Determine availability of data directory and parse bitcoin.conf
+    /// 6. Determine availability of data directory and parse coyotecoin.conf
     /// - Do not call GetDataDir(true) before this step finishes
     if (!CheckDataDirOption()) {
         InitError(strprintf(Untranslated("Specified data directory \"%s\" does not exist.\n"), gArgs.GetArg("-datadir", "")));
@@ -592,7 +593,7 @@ int GuiMain(int argc, char* argv[])
         exit(EXIT_SUCCESS);
 
     // Start up the payment server early, too, so impatient users that click on
-    // bitcoin: links repeatedly have their payment requests routed to this process:
+    // coyotecoin: links repeatedly have their payment requests routed to this process:
     if (WalletModel::isWalletEnabled()) {
         app.createPaymentServer();
     }
