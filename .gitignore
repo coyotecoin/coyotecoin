@@ -155,3 +155,5 @@ dist/
 # Visual Studio Code
 .vscode
 /.vscode
+.vscode/settings.json
+/.vscode/settings.json
