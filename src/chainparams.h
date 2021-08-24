@@ -1,10 +1,11 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2020 The Bitcoin Core developers
+// Copyright (c) 2021-2021 The Coyotecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_CHAINPARAMS_H
-#define BITCOIN_CHAINPARAMS_H
+#ifndef COYOTECOIN_CHAINPARAMS_H
+#define COYOTECOIN_CHAINPARAMS_H
 
 #include <chainparamsbase.h>
 #include <consensus/params.h>
@@ -62,7 +63,7 @@ struct ChainTxData {
 
 /**
  * CChainParams defines various tweakable parameters of a given instance of the
- * Bitcoin system.
+ * Coyotecoincoin system.
  */
 class CChainParams
 {
@@ -154,4 +155,4 @@ const CChainParams &Params();
  */
 void SelectParams(const std::string& chain);
 
-#endif // BITCOIN_CHAINPARAMS_H
+#endif // COYOTECOIN_CHAINPARAMS_H

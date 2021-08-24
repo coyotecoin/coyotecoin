@@ -1,10 +1,11 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2020 The Bitcoin Core developers
+// Copyright (c) 2021-2021 The Coyotecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_HASH_H
-#define BITCOIN_HASH_H
+#ifndef COYOTECOIN_HASH_H
+#define COYOTECOIN_HASH_H
 
 #include <attributes.h>
 #include <crypto/common.h>
@@ -45,7 +46,7 @@ public:
     }
 };
 
-/** A hasher class for Bitcoin's 160-bit hash (SHA-256 + RIPEMD-160). */
+/** A hasher class for Coyotecoin's 160-bit hash (SHA-256 + RIPEMD-160). */
 class CHash160 {
 private:
     CSHA256 sha;
@@ -211,4 +212,4 @@ void BIP32Hash(const ChainCode &chainCode, unsigned int nChild, unsigned char he
  */
 CHashWriter TaggedHash(const std::string& tag);
 
-#endif // BITCOIN_HASH_H
+#endif // COYOTECOIN_HASH_H

@@ -1,4 +1,5 @@
 // Copyright (c) 2009-2020 The Bitcoin Core developers
+// Copyright (c) 2021-2021 The Coyotecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -44,4 +45,4 @@ std::string FormatSubVersion(const std::string& name, int nClientVersion, const 
 
 #endif // WINDRES_PREPROC
 
-#endif // BITCOIN_CLIENTVERSION_H
+#endif // COYOTECOIN_CLIENTVERSION_H

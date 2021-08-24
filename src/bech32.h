@@ -1,4 +1,5 @@
 // Copyright (c) 2017, 2021 Pieter Wuille
+// Copyright (c) 2021-2021 The Coyotecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -22,7 +23,6 @@ namespace bech32
 
 enum class Encoding {
     INVALID, //!< Failed decoding
-
     BECH32,  //!< Bech32 encoding as defined in BIP173
     BECH32M, //!< Bech32m encoding as defined in BIP350
 };
@@ -46,4 +46,4 @@ DecodeResult Decode(const std::string& str);
 
 } // namespace bech32
 
-#endif // BITCOIN_BECH32_H
+#endif // COYOTECOIN_BECH32_H

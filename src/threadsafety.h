@@ -1,10 +1,11 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2020 The Bitcoin Core developers
+// Copyright (c) 2021-2021 The Coyotecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_THREADSAFETY_H
-#define BITCOIN_THREADSAFETY_H
+#ifndef COYOTECOIN_THREADSAFETY_H
+#define COYOTECOIN_THREADSAFETY_H
 
 #include <mutex>
 
@@ -74,4 +75,4 @@ public:
     ~StdLockGuard() UNLOCK_FUNCTION() {}
 };
 
-#endif // BITCOIN_THREADSAFETY_H
+#endif // COYOTECOIN_THREADSAFETY_H

@@ -1,4 +1,5 @@
 // Copyright (c) 2016-2020 The Bitcoin Core developers
+// Copyright (c) 2021-2021 The Coyotecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -137,4 +138,4 @@ public:
     ReadStatus FillBlock(CBlock& block, const std::vector<CTransactionRef>& vtx_missing);
 };
 
-#endif // BITCOIN_BLOCKENCODINGS_H
+#endif // COYOTECOIN_BLOCKENCODINGS_H

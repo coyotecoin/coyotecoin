@@ -1,9 +1,10 @@
 // Copyright (c) 2016 Jeremy Rubin
+// Copyright (c) 2021-2021 The Coyotecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_CUCKOOCACHE_H
-#define BITCOIN_CUCKOOCACHE_H
+#ifndef COYOTECOIN_CUCKOOCACHE_H
+#define COYOTECOIN_CUCKOOCACHE_H
 
 #include <algorithm> // std::find
 #include <array>
@@ -480,4 +481,4 @@ public:
 };
 } // namespace CuckooCache
 
-#endif // BITCOIN_CUCKOOCACHE_H
+#endif // COYOTECOIN_CUCKOOCACHE_H

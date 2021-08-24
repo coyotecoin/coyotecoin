@@ -1,9 +1,10 @@
 // Copyright (c) 2018-2021 The Bitcoin Core developers
+// Copyright (c) 2021-2021 The Coyotecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_EXTERNAL_SIGNER_H
-#define BITCOIN_EXTERNAL_SIGNER_H
+#ifndef COYOTECOIN_EXTERNAL_SIGNER_H
+#define COYOTECOIN_EXTERNAL_SIGNER_H
 
 #include <univalue.h>
 #include <util/system.h>
@@ -33,7 +34,7 @@ public:
     //! Master key fingerprint of the signer
     std::string m_fingerprint;
 
-    //! Bitcoin mainnet, testnet, etc
+    //! Coyotecoin mainnet, testnet, etc
     std::string m_chain;
 
     //! Name of signer
@@ -67,4 +68,4 @@ public:
 
 #endif // ENABLE_EXTERNAL_SIGNER
 
-#endif // BITCOIN_EXTERNAL_SIGNER_H
+#endif // COYOTECOIN_EXTERNAL_SIGNER_H

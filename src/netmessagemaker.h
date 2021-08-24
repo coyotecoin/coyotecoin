@@ -1,10 +1,11 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2020 The Bitcoin Core developers
+// Copyright (c) 2021-2021 Coyotecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_NETMESSAGEMAKER_H
-#define BITCOIN_NETMESSAGEMAKER_H
+#ifndef COYOTECOIN_NETMESSAGEMAKER_H
+#define COYOTECOIN_NETMESSAGEMAKER_H
 
 #include <net.h>
 #include <serialize.h>
@@ -33,4 +34,4 @@ private:
     const int nVersion;
 };
 
-#endif // BITCOIN_NETMESSAGEMAKER_H
+#endif // COYOTECOIN_NETMESSAGEMAKER_H

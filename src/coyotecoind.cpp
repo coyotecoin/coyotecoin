@@ -1,10 +1,11 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2020 The Bitcoin Core developers
+// Copyright (c) 2021-2021 The Coyotecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #if defined(HAVE_CONFIG_H)
-#include <config/bitcoin-config.h>
+#include <config/coyotecoin-config.h>
 #endif
 
 #include <chainparams.h>
@@ -111,7 +112,7 @@ static bool AppInit(NodeContext& node, int argc, char* argv[])
 
     util::ThreadSetInternalName("init");
 
-    // If Qt is used, parameters/bitcoin.conf are parsed in qt/bitcoin.cpp's main()
+    // If Qt is used, parameters/coyotecoin.conf are parsed in qt/coyotecoin.cpp's main()
     SetupServerArgs(node);
     ArgsManager& args = *Assert(node.args);
     std::string error;
@@ -125,7 +126,7 @@ static bool AppInit(NodeContext& node, int argc, char* argv[])
 
         if (!args.IsArgSet("-version")) {
             strUsage += FormatParagraph(LicenseInfo()) + "\n"
-                "\nUsage:  bitcoind [options]                     Start " PACKAGE_NAME "\n"
+                "\nUsage:  coyotecoind [options]                     Start " PACKAGE_NAME "\n"
                 "\n";
             strUsage += args.GetHelpMessage();
         }
@@ -161,7 +162,7 @@ static bool AppInit(NodeContext& node, int argc, char* argv[])
         // Error out when loose non-argument tokens are encountered on command line
         for (int i = 1; i < argc; i++) {
             if (!IsSwitchChar(argv[i][0])) {
-                return InitError(Untranslated(strprintf("Command line contains unexpected token '%s', see bitcoind -h for a list of options.\n", argv[i])));
+                return InitError(Untranslated(strprintf("Command line contains unexpected token '%s', see coyotecoind -h for a list of options.\n", argv[i])));
             }
         }
 
@@ -170,7 +171,7 @@ static bool AppInit(NodeContext& node, int argc, char* argv[])
             return false;
         }
 
-        // -server defaults to true for bitcoind but not for the GUI so do this here
+        // -server defaults to true for coyotecoind but not for the GUI so do this here
         args.SoftSetBoolArg("-server", true);
         // Set this early so that parameter interactions go to console
         InitLogging(args);
@@ -263,7 +264,7 @@ int main(int argc, char* argv[])
 
     SetupEnvironment();
 
-    // Connect bitcoind signal handlers
+    // Connect coyotecoind signal handlers
     noui_connect();
 
     return (AppInit(node, argc, argv) ? EXIT_SUCCESS : EXIT_FAILURE);

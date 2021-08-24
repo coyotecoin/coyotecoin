@@ -1,9 +1,10 @@
 // Copyright (c) 2011-2020 The Bitcoin Core developers
+// Copyright (c) 2021-2021 Coyotecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #if defined(HAVE_CONFIG_H)
-#include <config/bitcoin-config.h>
+#include <config/coyotecoin-config.h>
 #endif
 
 #include <mapport.h>

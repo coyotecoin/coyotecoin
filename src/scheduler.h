@@ -1,9 +1,10 @@
 // Copyright (c) 2015-2020 The Bitcoin Core developers
+// Copyright (c) 2021-2021 The Coyotecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_SCHEDULER_H
-#define BITCOIN_SCHEDULER_H
+#ifndef COYOTECOIN_SCHEDULER_H
+#define COYOTECOIN_SCHEDULER_H
 
 #include <condition_variable>
 #include <functional>

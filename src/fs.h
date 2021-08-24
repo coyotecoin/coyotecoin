@@ -1,9 +1,10 @@
 // Copyright (c) 2017-2019 The Bitcoin Core developers
+// Copyright (c) 2021-2021 The Coyotecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_FS_H
-#define BITCOIN_FS_H
+#ifndef COYOTECOIN_FS_H
+#define COYOTECOIN_FS_H
 
 #include <stdio.h>
 #include <string>
@@ -103,4 +104,4 @@ namespace fsbridge {
 #endif // WIN32 && __GLIBCXX__
 };
 
-#endif // BITCOIN_FS_H
+#endif // COYOTECOIN_FS_H
