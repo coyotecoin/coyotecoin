@@ -151,3 +151,7 @@ dist/
 *.background.tiff
 
 /guix-build-*
+
+# Visual Studio Code
+.vscode
+/.vscode
