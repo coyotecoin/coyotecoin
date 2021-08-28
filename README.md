@@ -32,7 +32,7 @@ The `master` branch is regularly built (see `doc/build-*.md` for instructions) a
 completely stable. [Tags](https://github.com/coyotecoin/coyotecoin/tags) are created
 regularly from release branches to indicate new official, stable release versions of Coyotecoin Core.
 
-The https://github.com/bitcoin-core/gui repository is used exclusively for the
+The https://github.com/coyotecoin-core/gui repository is used exclusively for the
 development of the GUI. Its master branch is identical in all monotree
 repositories. Release branches and tags do not exist, so please do not fork
 that repository unless it is for development reasons.
